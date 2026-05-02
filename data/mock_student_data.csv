@@ -1,0 +1,39 @@
+student_id,major,stated_interest
+S_001,Computer Science,Natural Science
+S_002,Economics,Social Science
+S_003,Political Science,Social Science
+S_004,Psychology,Social Science
+S_005,Biology,Natural Science
+S_006,History,Humanities
+S_007,English,Language
+S_008,Mathematics,STEM
+S_009,Neuroscience,Social Science
+S_010,Chemical Engineering,STEM
+S_011,Mechanical Engineering,STEM
+S_012,Biomedical Engineering,STEM
+S_013,Statistics,Humanities
+S_014,Philosophy,Humanities
+S_015,Anthropology,STEM
+S_016,Sociology,Humanities
+S_017,Art History,Arts
+S_018,Creative Writing,Language
+S_019,Film & Media Studies,Arts
+S_020,Computer Science,Language
+S_021,Economics,STEM
+S_022,Political Science,Social Science
+S_023,Psychology,Natural Science
+S_024,Biology,Social Science
+S_025,History,Social Science
+S_026,English,Language
+S_027,Mathematics,STEM
+S_028,Neuroscience,Arts
+S_029,Chemical Engineering,STEM
+S_030,Mechanical Engineering,STEM
+S_031,Biomedical Engineering,STEM
+S_032,Statistics,STEM
+S_033,Philosophy,Social Science
+S_034,Anthropology,Social Science
+S_035,Sociology,Social Science
+S_036,Art History,Humanities
+S_037,Creative Writing,Language
+S_038,Film & Media Studies,Humanities
