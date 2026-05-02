@@ -4,6 +4,11 @@
   <title>Course Recommender</title>
 
   <style>
+    label {
+  display: block;
+  margin-top: 30px;
+}
+
     body {
       font-family: Arial;
       background: #f5f5f5;
@@ -54,14 +59,10 @@
 </select>
 
 
-    <label>Interests:</label>
-    <textarea id="interests" placeholder="e.g. AI, philosophy"></textarea>
+<label><strong>Interests:</strong></label><br>
 
-    <label>Courses Taken:</label>
-    <textarea id="courses" placeholder="Comma separated"></textarea>
-
-    <label>Language: <span id="langVal"></span></label>
-
+    
+<label>Language: <span id="langVal"></span></label>
 <input type="range" id="langSlider" min="0" max="100" value="50">
 
 <label>Arts: <span id="artVal"></span></label>

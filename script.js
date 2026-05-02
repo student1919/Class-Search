@@ -15,15 +15,25 @@ document.querySelectorAll("input[type='range']").forEach(slider => {
 
 const majors = [
   "Computer Science",
-  "Business Administration",
-  "Biology",
-  "Psychology",
-  "Mechanical Engineering",
   "Economics",
   "Political Science",
+  "Psychology",
+  "Engineering",
+  "Biology",
+  "History",
   "English",
   "Mathematics",
-  "Chemistry"
+  "Neuroscience",
+  "Chemical Engineering",
+  "Mechanical Engineering",
+  "Biomedical Engineering",
+  "Statistics",
+  "Philosophy",
+  "Anthropology",
+  "Sociology",
+  "Art History",
+  "Creative Writing",
+  "Film & Media Studies"
 ];
 
 const majorDropdown = document.getElementById("major");
@@ -38,8 +48,6 @@ majors.forEach(major => {
 async function getRecommendations() {
   // 1. Get user input
   const major = document.getElementById("major").value;
-  const interests = document.getElementById("interests").value;
-  const courses = document.getElementById("courses").value;
 
   const resultsDiv = document.getElementById("results");
 
@@ -52,13 +60,17 @@ async function getRecommendations() {
   stem: document.getElementById("stemSlider").value
 };
 
+
+  if (!major) {
+    resultsDiv.innerHTML = "<p style='color:red;'>Please select a major.</p>";
+    return;
+  }
+
   // 2. Show loading message
   resultsDiv.innerHTML = "<p>Loading recommendations...</p>";
 
   const userData = {
     major: major,
-    interests: interests,
-    courses: courses,
     preferences: sliders
   };
 
@@ -81,10 +93,14 @@ async function getRecommendations() {
       const div = document.createElement("div");
       div.className = "course";
 
-      div.innerHTML = `
-        <b>${course.name}</b><br>
-        Score: ${course.score}
-      `;
+      const title = document.createElement("b");
+      title.textContent = course.name;
+
+      const score = document.createElement("div");
+      score.textContent = "Score: " + course.score;
+
+      div.appendChild(title);
+      div.appendChild(score);
 
       resultsDiv.appendChild(div);
     });
