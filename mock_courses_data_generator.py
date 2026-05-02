@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 
 df = pd.read_csv("data/2026-Spring.csv")
@@ -93,6 +94,9 @@ for category, count in category_counts.items():
         selected_courses.append(selected)
 
 new_df = pd.concat(selected_courses, ignore_index=True)
+
+# Add culpa rating column with random values between 1.00 and 5.00
+new_df['culpa_rating'] = np.random.uniform(1.00, 5.00, len(new_df)).round(2)
 
 print(new_df.head(5))
 print(new_df.shape[0])
