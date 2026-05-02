@@ -61,10 +61,6 @@ async function getRecommendations() {
 };
 
 
-  if (!major) {
-    resultsDiv.innerHTML = "<p style='color:red;'>Please select a major.</p>";
-    return;
-  }
 
   // 2. Show loading message
   resultsDiv.innerHTML = "<p>Loading recommendations...</p>";
