@@ -18,7 +18,6 @@ const majors = [
   "Economics",
   "Political Science",
   "Psychology",
-  "Engineering",
   "Biology",
   "History",
   "English",
