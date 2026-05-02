@@ -49,13 +49,35 @@
     <h2>Course Recommender</h2>
 
     <label>Major:</label>
-    <input id="major" placeholder="e.g. Computer Science">
+    <select id="major">
+  <option value="">--Select a major--</option>
+</select>
+
 
     <label>Interests:</label>
     <textarea id="interests" placeholder="e.g. AI, philosophy"></textarea>
 
     <label>Courses Taken:</label>
     <textarea id="courses" placeholder="Comma separated"></textarea>
+
+    <label>Language: <span id="langVal"></span></label>
+
+<input type="range" id="langSlider" min="0" max="100" value="50">
+
+<label>Arts: <span id="artVal"></span></label>
+<input type="range" id="artSlider" min="0" max="100" value="50">
+
+<label>Humanities: <span id="humVal"></span></label>
+<input type="range" id="humSlider" min="0" max="100" value="50">
+
+<label>Social Science: <span id="socVal"></span></label>
+<input type="range" id="socSlider" min="0" max="100" value="50">
+
+<label>Natural Science: <span id="natVal"></span></label>
+<input type="range" id="natSlider" min="0" max="100" value="50">
+
+<label>STEM: <span id="stemVal"></span></label>
+<input type="range" id="stemSlider" min="0" max="100" value="50">
 
     <button onclick="getRecommendations()">Get Recommendations</button>
 

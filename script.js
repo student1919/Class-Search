@@ -1,3 +1,40 @@
+document.querySelectorAll("input[type='range']").forEach(slider => {
+  const outputId = slider.id.replace("Slider", "Val");
+  const output = document.getElementById(outputId);
+
+
+  // set initial value
+  output.textContent = slider.value;
+
+  // update on move
+  slider.addEventListener("input", () => {
+    output.textContent = slider.value;
+  });
+});
+
+
+const majors = [
+  "Computer Science",
+  "Business Administration",
+  "Biology",
+  "Psychology",
+  "Mechanical Engineering",
+  "Economics",
+  "Political Science",
+  "English",
+  "Mathematics",
+  "Chemistry"
+];
+
+const majorDropdown = document.getElementById("major");
+
+majors.forEach(major => {
+  const option = document.createElement("option");
+  option.textContent = major;
+  option.value = major.toLowerCase().replace(/ /g, "_"); // for example: "computer_science"
+  majorDropdown.appendChild(option);
+});
+
 async function getRecommendations() {
   // 1. Get user input
   const major = document.getElementById("major").value;
@@ -6,13 +43,23 @@ async function getRecommendations() {
 
   const resultsDiv = document.getElementById("results");
 
+  const sliders = {
+  language: document.getElementById("langSlider").value,
+  arts: document.getElementById("artSlider").value,
+  humanities: document.getElementById("humSlider").value,
+  social_science: document.getElementById("socSlider").value,
+  natural_science: document.getElementById("natSlider").value,
+  stem: document.getElementById("stemSlider").value
+};
+
   // 2. Show loading message
   resultsDiv.innerHTML = "<p>Loading recommendations...</p>";
 
   const userData = {
     major: major,
     interests: interests,
-    courses: courses
+    courses: courses,
+    preferences: sliders
   };
 
   try {
