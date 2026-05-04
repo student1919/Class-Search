@@ -1,13 +1,20 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import pandas as pd
 import numpy as np
-from sklearn.decomposition import TruncatedSVD
+import linAlg
+import os
+#from sklearn.decomposition import TruncatedSVD
 
 app = Flask(__name__)
+CORS(app)
 
 # Load the data
-student_df = pd.read_csv("mock_student_data.csv")
-course_df = pd.read_csv("mock_courses_data.csv")
+base_Directory = os.path.dirname(os.path.abspath(__file__))
+mock_student_data_path = os.path.join(base_Directory, "data", "mock_student_data.csv")
+mock_courses_data_path = os.path.join(base_Directory, "data", "mock_courses_data.csv")
+student_df = pd.read_csv(mock_student_data_path)
+course_df = pd.read_csv(mock_courses_data_path)
 
 # Define interests
 interests = ["Language", "Arts", "STEM", "Humanities", "Social Science", "Natural Science"]
@@ -29,10 +36,11 @@ def create_user_item_matrix():
     return user_item_matrix
 
 # Function to apply SVD
-def apply_svd(user_item_matrix):
-    svd = TruncatedSVD(n_components=5)
-    svd_matrix = svd.fit_transform(user_item_matrix)
-    return svd_matrix
+# def apply_svd(user_item_matrix):
+#     svd = TruncatedSVD(n_components=5)
+#     svd_matrix = svd.fit_transform(user_item_matrix)
+#     return svd_matrix
+
 
 @app.route('/recommend', methods=['POST'])
 def recommend():
@@ -40,13 +48,15 @@ def recommend():
     user_data = request.get_json()
     major = user_data.get('major')
     preferences = user_data.get('preferences')
-
+    
     # Filter or process the data based on the user's input (e.g., major)
     # Generate user-item interaction matrix
     user_item_matrix = create_user_item_matrix()
+    print("User-Item Matrix:")
+    print(user_item_matrix)
 
     # Apply SVD to the matrix
-    svd_matrix = apply_svd(user_item_matrix)
+    U, sigmaMatrix, V = linAlg.SVD(user_item_matrix.to_numpy())
     
     # You can then make recommendations based on the SVD matrix and the user's preferences
     # For simplicity, let's return some of the top courses for the user

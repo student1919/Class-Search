@@ -60,7 +60,7 @@ U, sigmaMatrix, V = SVD(test_matrix)
 
 # print('The matrix VT is \n', vt, '\n')
 
-# def predict_User_Score(user, item, U, sigmaMatrix, V):
+#def predict_User_Score(user, item, U, sigmaMatrix, V):
     
     
 # def cosine_similarity(vecA, vecB):

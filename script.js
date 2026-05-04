@@ -89,7 +89,7 @@ async function getRecommendations() {
       div.className = "course";
 
       const title = document.createElement("b");
-      title.textContent = course.name;
+      title.textContent = course.course_name;
 
       const score = document.createElement("div");
       score.textContent = "Score: " + course.score;
