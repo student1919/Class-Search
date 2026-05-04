@@ -42,26 +42,45 @@ def SVD(A):
     U = A @ V.T / sigmaMatrix
     return U, sigmaMatrix, V
 
-test_matrix = np.array([[1, 2, 5], [3, 4, 9], [5, 6, 2], [7, 8, 1], [9, 10, 3]])
-U, sigmaMatrix, V = SVD(test_matrix)
+# test_matrix = np.array([[1, 2, 5], [3, 4, 9], [5, 6, 2], [7, 8, 1], [9, 10, 3]])
+# U, sigmaMatrix, V = SVD(test_matrix)
 
-# print('The matrix U is \n', U, '\n')
+def new_user_vector(preferences: dict, all_courses: list, Preference_Map):
+   
+    #fills in the new student vector with 0s 
+    user_vector = np.zeros(len(all_courses))
+    #iterates through each course index
+    course_index = {code: i for i, code in enumerate(all_courses)}
 
-# print('The diagonal entries of Sigma are \n', sigmaMatrix, '\n')
+    #loops through the preferences and fills in the user vector with the slider values
+    # mapped to a score between 1 and 10, if the course is specifically one we are looking for
+    for pref, slider_value in preferences.items():
+        score = 1 + (slider_value / 100) * 9          # maps 0 -> 1, 100 -> 10
+        for course_code in Preference_Map.get(pref, []):
+            if course_code in course_index:
+                user_vector[course_index[course_code]] = score
 
-# print('The matrix VT is \n', V, '\n')
+    return user_vector
 
-# u, s, vt = np.linalg.svd(test_matrix, full_matrices=False)
+def cosine_similarity(vector1, vector2):
+    dot_product = np.dot(vector1, np.transpose(vector2))
+    normalizedV1 = np.linalg.norm(vector1)
+    normalizedV2 = np.linalg.norm(vector2)
+    if normalizedV1 == 0 or normalizedV2 == 0:
+        return 0.0
+    return dot_product / (normalizedV1 * normalizedV2)
 
-# print("Built in SVD from numpy: \n")
-# print('The matrix U is \n', u, '\n')
-
-# print('The diagonal entries of Sigma are \n', s, '\n')
-
-# print('The matrix VT is \n', vt, '\n')
-
-#def predict_User_Score(user, item, U, sigmaMatrix, V):
+def KNN(user_vector, U, V, sigmaMatrix, k=5):
     
+    #projects the new user vector into latent space (same space as rows of U)
+    user_latent = user_vector @ V.T / sigmaMatrix   # shape (k,)
     
-# def cosine_similarity(vecA, vecB):
-#     return np.dot(vecA, vecB) / (np.linalg.norm(vecA) * np.linalg.norm(vecB))    
+    similarities = []
+    for i in range(U.shape[0]):
+        similarity = cosine_similarity(user_latent, U[i])
+        similarities.append((i, similarity))
+    
+    similarities.sort(key=lambda x: x[1], reverse=True)
+    return similarities[:k]
+
+    
